@@ -4,10 +4,9 @@ from plyer import notification
 
 plugin = False
 
-battery = psutil.sensors_battery()
-percent = battery.percent
 
 def popup(message):
+
     notification.notify(
         title = "Battery Percentage",
         message = message,
@@ -21,6 +20,9 @@ def popup(message):
 #     popup("More than 50\n"+str(percent)+"% Battery percent remaining")
 
 def checker():
+    
+    battery = psutil.sensors_battery()
+    percent = battery.percent
 
     if percent > 80:
         popup("Please plug out your charger\n"+str(percent)+"% Battery percent remaining")
