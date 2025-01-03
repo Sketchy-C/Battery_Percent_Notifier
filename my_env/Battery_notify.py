@@ -2,7 +2,7 @@ import time
 import psutil
 from plyer import notification
 
-plugin = False
+plugin = True
 
 
 def popup(message):
@@ -20,15 +20,19 @@ def popup(message):
 #     popup("More than 50\n"+str(percent)+"% Battery percent remaining")
 
 def checker():
-    
+    global plugin
+
     battery = psutil.sensors_battery()
     percent = battery.percent
 
     if percent > 80:
+        plugin = False
         popup("Please plug out your charger\n"+str(percent)+"% Battery percent remaining")
+        
     else:
         popup("Keep on charging\n"+str(percent)+"% Battery percent remaining")
-
+        plugin = True
+    
     time.sleep(300)
     return checker()
 
